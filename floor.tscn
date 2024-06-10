@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkttr4pyyywji"]
+
+[ext_resource type="Script" path="res://death.gd" id="1_qrxr3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll8ci"]
+size = Vector2(479, 40)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_421o2"]
+bg_color = Color(0, 0.701961, 0.54902, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_color = Color(0, 0.470588, 0.180392, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hdo4"]
+size = Vector2(481, 8)
+
+[node name="Floor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_qrxr3")
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(239.5, 700)
+shape = SubResource("RectangleShape2D_ll8ci")
+
+[node name="Panel" type="Panel" parent="RigidBody2D"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 680.0
+offset_right = 480.0
+offset_bottom = 720.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_421o2")
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D/Panel"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Panel/Area2D"]
+position = Vector2(239.5, -6)
+shape = SubResource("RectangleShape2D_8hdo4")
+
+[connection signal="body_entered" from="RigidBody2D/Panel/Area2D" to="." method="_on_death"]

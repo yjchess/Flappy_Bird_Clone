@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn0gcyyd74pv2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_60gld"]
+[ext_resource type="PackedScene" uid="uid://bd4j6il16mtsm" path="res://player.tscn" id="1_q4wjx"]
+[ext_resource type="PackedScene" uid="uid://du6hnet8n0r6b" path="res://hud.tscn" id="2_2cw70"]
+[ext_resource type="PackedScene" uid="uid://btcspaflkmur2" path="res://pipe.tscn" id="3_dovr0"]
+[ext_resource type="PackedScene" uid="uid://dkttr4pyyywji" path="res://floor.tscn" id="5_xf8qs"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_60gld")
+pipe = ExtResource("3_dovr0")
+
+[node name="HUD" parent="." instance=ExtResource("2_2cw70")]
+
+[node name="Player" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player" parent="Player" instance=ExtResource("1_q4wjx")]
+
+[node name="PipeSpawner" type="Timer" parent="."]
+wait_time = 5.5
+autostart = true
+
+[node name="Pipe" parent="." groups=["pipe"] instance=ExtResource("3_dovr0")]
+offset_top = -428.0
+offset_bottom = -388.0
+
+[node name="Pipe2" parent="." instance=ExtResource("3_dovr0")]
+offset_top = 442.0
+offset_bottom = 482.0
+
+[node name="Floor" parent="." instance=ExtResource("5_xf8qs")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[connection signal="timeout" from="PipeSpawner" to="." method="_on_pipe_spawner_timeout"]
+[connection signal="point" from="Pipe" to="." method="_on_pipe_point"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://btcspaflkmur2"]
+
+[ext_resource type="Script" path="res://pipe.gd" id="1_phr64"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_341cc"]
+bg_color = Color(0, 0.74902, 0.141176, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2f86"]
+size = Vector2(39.5, 720)
+
+[node name="Pipe" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_phr64")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Panel" type="Panel" parent="Sprite2D"]
+anchors_preset = -1
+anchor_bottom = 466.0
+offset_right = 40.0
+offset_bottom = 253.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_341cc")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20.25, 360)
+shape = SubResource("RectangleShape2D_f2f86")

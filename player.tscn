@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd4j6il16mtsm"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_obc7t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s4gjf"]
+radius = 21.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0w23u"]
+bg_color = Color(1, 0.34902, 0.207843, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbvui"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcstf"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_obc7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 20)
+shape = SubResource("CircleShape2D_s4gjf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Body" type="Panel" parent="Sprite2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0w23u")
+metadata/_edit_use_anchors_ = true
+
+[node name="Eye" type="Panel" parent="Sprite2D"]
+offset_left = 22.0
+offset_top = 9.0
+offset_right = 37.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qbvui")
+metadata/_edit_use_anchors_ = true
+
+[node name="Iris" type="Panel" parent="Sprite2D/Eye"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 14.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dcstf")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Sprite2D/Eye"]
+layout_mode = 0
+offset_left = -14.0
+offset_right = 26.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "<"
+metadata/_edit_use_anchors_ = true

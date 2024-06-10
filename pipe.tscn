@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://btcspaflkmur2"]
+
+[ext_resource type="Script" path="res://Pipe.gd" id="1_5e3no"]
+[ext_resource type="Script" path="res://death.gd" id="1_u6j4p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_341cc"]
+bg_color = Color(0, 0.74902, 0.141176, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_og154"]
+size = Vector2(8, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2f86"]
+size = Vector2(40, 720)
+
+[node name="Control" type="Control" groups=["pipe"]]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("1_u6j4p")
+
+[node name="Pipe" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+max_contacts_reported = 6
+contact_monitor = true
+script = ExtResource("1_5e3no")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pipe"]
+
+[node name="Panel" type="Panel" parent="Pipe/Sprite2D"]
+anchors_preset = -1
+anchor_bottom = 466.0
+offset_right = 40.0
+offset_bottom = 253.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_341cc")
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="Pipe"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe/Area2D"]
+position = Vector2(48, 795)
+shape = SubResource("RectangleShape2D_og154")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pipe"]
+position = Vector2(20.25, 360)
+shape = SubResource("RectangleShape2D_f2f86")
+
+[connection signal="body_entered" from="Pipe" to="." method="_on_death"]
+[connection signal="body_shape_entered" from="Pipe" to="." method="_on_death"]
+[connection signal="point" from="Pipe" to="." method="_on_pipe_point"]
+[connection signal="body_shape_entered" from="Pipe/Area2D" to="Pipe" method="_on_area_2d_body_shape_entered"]
