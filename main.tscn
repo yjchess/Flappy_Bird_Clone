@@ -13,6 +13,8 @@ size = Vector2(39, 715)
 script = ExtResource("1_60gld")
 pipe = ExtResource("3_dovr0")
 
+[node name="Floor" parent="." instance=ExtResource("5_xf8qs")]
+
 [node name="HUD" parent="." instance=ExtResource("2_2cw70")]
 
 [node name="Player" type="Control" parent="."]
@@ -43,18 +45,16 @@ offset_bottom = -388.0
 offset_top = 442.0
 offset_bottom = 482.0
 
-[node name="Floor" parent="." instance=ExtResource("5_xf8qs")]
-
 [node name="destruction" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="destruction"]
 position = Vector2(-26.5, 359.5)
 shape = SubResource("RectangleShape2D_rfh8x")
 
+[connection signal="death" from="Floor" to="." method="_on_player_death"]
 [connection signal="startGame" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="PipeSpawner" to="." method="_on_pipe_spawner_timeout"]
 [connection signal="death" from="Pipe" to="." method="_on_player_death"]
 [connection signal="point" from="Pipe" to="." method="_on_pipe_point"]
 [connection signal="death" from="Pipe2" to="." method="_on_player_death"]
-[connection signal="death" from="Floor" to="." method="_on_player_death"]
 [connection signal="body_entered" from="destruction" to="." method="_on_destruction_body_entered"]
