@@ -17,7 +17,10 @@ func _on_pipe_point():
 	emit_signal("point")
 	pass # Replace with function body.
 
-func _on_death(body):
+func _on_death():
+	emit_signal("death")
+
+func _on_floor_death(body):
 	if body.name == "Player":
 		emit_signal("death")
 

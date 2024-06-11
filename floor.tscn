@@ -43,4 +43,4 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_421o2")
 position = Vector2(239.5, -6)
 shape = SubResource("RectangleShape2D_8hdo4")
 
-[connection signal="body_entered" from="RigidBody2D/Panel/Area2D" to="." method="_on_death"]
+[connection signal="body_entered" from="RigidBody2D/Panel/Area2D" to="." method="_on_floor_death"]

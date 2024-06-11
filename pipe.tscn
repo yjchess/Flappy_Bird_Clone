@@ -31,10 +31,7 @@ offset_bottom = 40.0
 grow_horizontal = 0
 script = ExtResource("1_u6j4p")
 
-[node name="Pipe" type="RigidBody2D" parent="."]
-gravity_scale = 0.0
-max_contacts_reported = 6
-contact_monitor = true
+[node name="Pipe" type="CharacterBody2D" parent="."]
 script = ExtResource("1_5e3no")
 
 [node name="Sprite2D" type="Sprite2D" parent="Pipe"]
@@ -57,7 +54,6 @@ shape = SubResource("RectangleShape2D_og154")
 position = Vector2(20.25, 360)
 shape = SubResource("RectangleShape2D_f2f86")
 
-[connection signal="body_entered" from="Pipe" to="." method="_on_death"]
-[connection signal="body_shape_entered" from="Pipe" to="." method="_on_death"]
+[connection signal="death" from="Pipe" to="." method="_on_death"]
 [connection signal="point" from="Pipe" to="." method="_on_pipe_point"]
 [connection signal="body_shape_entered" from="Pipe/Area2D" to="Pipe" method="_on_area_2d_body_shape_entered"]
